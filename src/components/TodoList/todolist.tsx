@@ -1,11 +1,12 @@
 import { type } from 'os';
-import React, { Component, useState } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 
 type Todo = {
   id : number;
   task : string;
   isCompleted : boolean;
 }
+
 
 export const ToDoList = () => {
 
@@ -16,29 +17,32 @@ export const ToDoList = () => {
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTasks(event.target.value);
   }
-  
+
+// create a new todo
+  const todo: Todo = {
+    id: Date.now(),
+    task : task,
+    isCompleted : false,
+  }
   // xủ xý submit form
   const handleFormSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    // check value if value empty
-    if(task.trim().length == 0){
+     // check value if value empty
+     if(task.trim().length == 0){
       alert("Please enter task!");
       return;
     }
-
-    // create a new todo
-    const todo: Todo = {
-      id: Date.now(),
-      task : task,
-      isCompleted : false,
-    }
-    // add todo to the state
-    setTodos([todo , ...todos]);
-    console.log([todo , ...todos])
-    // clear the value task
+    setTodos([todo, ...todos]); // add todo to the state
     setTasks("");
-
   }
+
+  useEffect(() => {
+    if(todos.length > 0){
+      sessionStorage.setItem(JSON.stringify(todo.id), JSON.stringify(todos));
+    }
+  },[todos]);
+  var data = sessionStorage.getItem(JSON.stringify(todos))
+  console.log(data)
 
   const handleChangeChecked = (todo : Todo) => {
     // lấy chỉ số cần làm việc 
@@ -76,7 +80,7 @@ export const ToDoList = () => {
       </form>
       <ul className="itemList">
         {todos.map((todo) => (
-          <li key={todo.id} className="item border">
+          <li key={todo.id} className="item">
             <div className='checkbox'>
                <input type="checkbox"  onChange = {() => handleChangeChecked} className="form-check-input" />
             </div>
