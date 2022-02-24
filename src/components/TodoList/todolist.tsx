@@ -1,103 +1,133 @@
 import React, { Component, useEffect, useState } from 'react';
 import { type } from 'os';
 
-type Todo = {
-  id : number;
-  task : string;
-  isCompleted : boolean;
+const getLocalItmes = () => {
+  let list = localStorage.getItem('lists');
+  console.log(list);
+
+  if (list) {
+
+      return JSON.parse(`${list}`);
+  } else {
+      return [];
+  }
 }
 
+const ToDoList = () => {
 
-export const ToDoList = () => {
+  const [inputData, setInputData] = useState('');
+  const [items, setItems] = useState(getLocalItmes());
+  const [toggleSubmit, setToggleSubmit] = useState(true);
+  const [isEditItem, setIsEditItem] = useState(null);
 
-  const [todos , setTodos] = useState<Todo[]>([]);
-  const [task , setTasks] = useState<string>("");
+  const addItem = () => {
+      if (!inputData) {
+          alert('plzz fill data');
+      } else if(inputData && !toggleSubmit) {
+          setItems(
+              items.map((elem:any) => {
+                  if (elem.id === isEditItem) {
+                      return { ...elem, name: inputData }
+                  }
+                  return elem;
+              })
+          )
+               setToggleSubmit(true);
 
-  // xử lý lấy dữ liệu từ input
-  const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setTasks(event.target.value);
+               setInputData('');
+
+               setIsEditItem(null);
+      } else {
+          const allInputData = { id: new Date().getTime().toString(), name:inputData }
+          setItems([...items, allInputData]);
+          setInputData('')
+      }
   }
 
-// create a new todo
-  const todo: Todo = {
-    id: Date.now(),
-    task : task,
-    isCompleted : false,
-  }
-  // xủ xý submit form
-  const handleFormSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-     // check value if value empty
-     if(task.trim().length == 0){
-      alert("Please enter task!");
-      return;
-    }
-    setTodos([todo, ...todos]); // add todo to the state
-    setTasks("");
-  }
-
-  useEffect(() => {
-    if(todos.length > 0){
-      sessionStorage.setItem(JSON.stringify(todo.id), JSON.stringify(todos));
-      const data = sessionStorage.getItem(JSON.stringify(todo.id))
-      console.log(data
-        )
-    }
-  },[todos]);
   
-  const handleChangeChecked = (todo : Todo) => {
-    // lấy chỉ số cần làm việc 
-    const index  = todos.indexOf(todo);
-    // thay đổi trạng thái của task
-    todo.isCompleted = !todo.isCompleted;
-    // thay đổi vị tri của từng task khi được add vào 
-    todos.splice(index , 1 , todo);
-    // cập nhật lại state
-    setTodos([...todos]);
+  // delete the items
+  const deleteItem = (index:any) => {
+      const updateditems = items.filter((elem:any) => {
+          return index !== elem.id;
+      });
 
+      setItems(updateditems);
   }
 
-  const handleDelete = (id : number) => {
-    // tìm kiếm id của của task đó 
-    const index = todos.findIndex((todo) => todo.id === id)
-    // delete todo 
-    todos.splice(index , 1);
-    // update state
-    setTodos([...todos]);
+  
+  const editItem = (id:any) => {
+      let newEditItem = items.find((elem:any) => {
+          return elem.id === id
+      });
+      console.log(newEditItem);
+
+      setToggleSubmit(false);
+
+      setInputData(newEditItem.name);
+
+      setIsEditItem(id);
+
   }
+  
+
+  // remove all 
+  const removeAll = () => {
+       setItems([]);
+  }
+
+  // add data to localStorage
+  useEffect(() => {
+     localStorage.setItem('lists', JSON.stringify(items))
+  }, [items]);
 
   return (
-    <div className='m-5'>
-      <form onSubmit={handleFormSubmit} className="form-submit">
-        <div className='inpuTask'>
-          <input 
-            type="text"
-            placeholder='Enter Task'
-            className='inputTask'
-            name = "task" 
-            value={task} 
-            onChange = {handleInput}
-          /></div>
-        <div className='typeSubmit'>
-        <button type='submit' className='btn btn-danger'> <span>Add</span></button>
-        </div>
-          
-      </form>
-      <ul className="itemList">
-        {todos.map((todo) => (
-          <li key={todo.id} className="item">
-            <div className='checkbox'>
-               <input type="checkbox"  onChange = {() => handleChangeChecked} className="form-check-input" />
-            </div>
-            <div className='contentTask'>
-               {todo.task}
-            </div>
-            <div className='btnClick'>
-               <button onClick={() => handleDelete(todo.id)} className="btn btn-outline-danger">Delete</button>
-            </div>
-          </li>
-        ))}
-      </ul>
-    </div>
+      <>
+          <div className="main-div">
+              <div className="child-div">
+                  <figure>
+                      {/* <img src={todo:any} alt="todologo" /> */}
+                      <figcaption>Add Your List Here ✌</figcaption>
+                  </figure>
+
+                  <div className="addItems">
+                      <input type="text" placeholder="✍ Add Items..."
+                         value={inputData} 
+                         onChange={(e) => setInputData(e.target.value) }
+                      />
+                      {
+                          toggleSubmit ? <i className="fa fa-plus add-btn" title="Add Item" onClick={addItem}> Add</i> :
+                               <i className="far fa-edit add-btn" title="Update Item" onClick={addItem}> Update</i>
+                      }
+                     
+                  </div>
+
+                  <div className="showItems">
+                      
+                      {
+                          items.map((elem:any) => {
+                              return (
+                                  <div className="eachItem" key={elem.id}>
+                                      <h3>{elem.name}</h3>
+                                      <div className="todo-btn">
+                                          <i className="far fa-edit add-btn" title="Edit Item" onClick={() => editItem(elem.id)}>edit</i>
+                                          <i className="far fa-trash-alt add-btn" title="Delete Item" onClick={() => deleteItem(elem.id)}>delete</i>
+                                      </div>
+                                </div>
+                              )
+                          })
+
+                      }
+                     
+                  </div>
+              
+                  {/* clear all button  */}
+                  <div className="showItems">
+                      <button className="btn effect04" data-sm-link-text="Remove All" onClick={removeAll}><span> CHECK LIST </span> </button>
+                  </div>
+              </div>
+        </div>  
+      </>
   )
 }
+
+export default ToDoList

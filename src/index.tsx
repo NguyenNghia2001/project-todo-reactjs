@@ -9,7 +9,7 @@ import App from "./App";
 // import boostrap 
 import 'bootstrap/dist/css/bootstrap.css';
 import './css/todolist.css';
-import  {ToDoList}  from './components/TodoList/todolist';
+import  ToDoList  from './components/TodoList/todolist';
 
 
 const rootElement = document.getElementById("root");
