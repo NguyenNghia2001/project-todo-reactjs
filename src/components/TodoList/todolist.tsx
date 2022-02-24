@@ -1,5 +1,5 @@
-import { type } from 'os';
 import React, { Component, useEffect, useState } from 'react';
+import { type } from 'os';
 
 type Todo = {
   id : number;
@@ -39,11 +39,12 @@ export const ToDoList = () => {
   useEffect(() => {
     if(todos.length > 0){
       sessionStorage.setItem(JSON.stringify(todo.id), JSON.stringify(todos));
+      const data = sessionStorage.getItem(JSON.stringify(todo.id))
+      console.log(data
+        )
     }
   },[todos]);
-  var data = sessionStorage.getItem(JSON.stringify(todos))
-  console.log(data)
-
+  
   const handleChangeChecked = (todo : Todo) => {
     // lấy chỉ số cần làm việc 
     const index  = todos.indexOf(todo);
@@ -68,6 +69,7 @@ export const ToDoList = () => {
   return (
     <div className='m-5'>
       <form onSubmit={handleFormSubmit} className="form-submit">
+        <div className='inpuTask'>
           <input 
             type="text"
             placeholder='Enter Task'
@@ -75,8 +77,11 @@ export const ToDoList = () => {
             name = "task" 
             value={task} 
             onChange = {handleInput}
-          />
-          <button type='submit' className=' snip1547'> <span>Add</span></button>
+          /></div>
+        <div className='typeSubmit'>
+        <button type='submit' className='btn btn-danger'> <span>Add</span></button>
+        </div>
+          
       </form>
       <ul className="itemList">
         {todos.map((todo) => (
