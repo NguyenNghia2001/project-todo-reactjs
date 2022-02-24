@@ -1,12 +1,11 @@
 import React, { Component, useEffect, useState } from 'react';
 import { type } from 'os';
+import { stringify } from 'querystring';
 
 const getLocalItmes = () => {
   let list = localStorage.getItem('lists');
   console.log(list);
-
   if (list) {
-
       return JSON.parse(`${list}`);
   } else {
       return [];
@@ -22,7 +21,7 @@ const ToDoList = () => {
 
   const addItem = () => {
       if (!inputData) {
-          alert('plzz fill data');
+          alert('Please fill data!');
       } else if(inputData && !toggleSubmit) {
           setItems(
               items.map((elem:any) => {
@@ -95,8 +94,8 @@ const ToDoList = () => {
                          onChange={(e) => setInputData(e.target.value) }
                       />
                       {
-                          toggleSubmit ? <i className="fa fa-plus add-btn" title="Add Item" onClick={addItem}> Add</i> :
-                               <i className="far fa-edit add-btn" title="Update Item" onClick={addItem}> Update</i>
+                          toggleSubmit ? <i title="Add Item" onClick={addItem} className='btn btn-outline-danger'> Add</i> :
+                               <i onClick={addItem} className="btn btn-outline-danger"> Update</i>
                       }
                      
                   </div>
@@ -115,7 +114,6 @@ const ToDoList = () => {
                                 </div>
                               )
                           })
-
                       }
                      
                   </div>

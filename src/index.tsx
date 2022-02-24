@@ -9,7 +9,8 @@ import App from "./App";
 // import boostrap 
 import 'bootstrap/dist/css/bootstrap.css';
 import './css/todolist.css';
-import  ToDoList  from './components/TodoList/todolist';
+import TodoList from './pages/TodoList';
+import NewsPage from './pages/NewsApp';
 
 
 const rootElement = document.getElementById("root");
@@ -17,8 +18,10 @@ render(
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<App />}>
-        <Route path="todolist"
-         element={<ToDoList />} />
+        <Route path="/todolist"
+         element={<TodoList />} />
+          <Route path="/itemnews"
+         element={<NewsPage />} />
       </Route>
     </Routes>
   </BrowserRouter>,

@@ -6,20 +6,24 @@
 
 .innerContainer {
     background: #060822;
-    flex: 1;
     margin-right: 20px;
     color: #fff;
     justify-content: space-around;
     border-radius: 40px;
 }
+.news, .users {
+  flex: 2;
+}
+#itemsContainer {
+  margin-bottom: 50px;
+}
+
 .inputTask{
     width: auto;
     border-radius: 5px;
     border: none;
     border-color: #2aafe4;
     height: 36px;
-
-
 }
 .text-app{
     margin-left: 130px;
@@ -72,7 +76,7 @@ html {
 }
 
 .main-div {
-  min-height: 100vh;
+  min-height: 10vh;
   display: flex;
   justify-content: center;
 }
@@ -97,7 +101,7 @@ html {
 input {
   /* display: block; */
   min-width: 40rem;
-  height: 3.4rem;
+  height: 3.6rem;
   padding: 2rem 1.2rem;
   font-size: 1.8rem;
   line-height: 1.42857143;
@@ -231,12 +235,11 @@ input:focus {
   cursor: pointer;
   font-size: 14px;
   font-weight: 400;
-  line-height: 45px;
-  max-width: 160px;
   position: relative;
   text-decoration: none;
   text-transform: uppercase;
   width: 100%;
+
 }
 .btn:hover {
   text-decoration: none;
@@ -285,3 +288,17 @@ input:focus {
   transform: translateY(0) scale(1, 1);
 }
 
+/* Main news  */
+.searchItem{
+  display: flex;
+  flex-direction: row;
+}
+.inputSearch {
+  flex: 2;
+}
+
+.listItem {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}

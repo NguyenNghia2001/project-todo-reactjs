@@ -8,7 +8,7 @@ import {
 export  const WorkList = () => {
     return(
         <>  
-            <Link to="/todolist" className="mb-4 fs-4 text-dark  text-decoration-none text-app">Todo  List App </Link> {" "}
+            <Link to="/todolist" className="mb-4 fs-1 text-danger   text-decoration-none text-app">Todo  List App </Link> {" "}
             <Outlet />
         </>
        
