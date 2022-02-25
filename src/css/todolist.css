@@ -11,8 +11,11 @@
     justify-content: space-around;
     border-radius: 40px;
 }
+.todo{
+  flex: 1;
+}
 .news, .users {
-  flex: 2;
+  flex: 4;
 }
 #itemsContainer {
   margin-bottom: 50px;
@@ -68,7 +71,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Source Sans Pro", sans-serif;
 }
 
 html {
@@ -144,26 +146,6 @@ input:focus {
   justify-content: space-around;
 }
 
-.fa {
-  margin-left: -2.5rem;
-  cursor: pointer;
-  pointer-events: auto;
-  z-index: 10;
-  background-color: #fff;
-  background-image: none;
-  color: #666;
-  -webkit-transition: color 0.15s linear;
-  transition: color 0.15s linear;
-  font-size: 2rem;
-}
-.fa:hover {
-  color: rgb(47, 214, 122);
-}
-
-.fa-plus:before {
-  content: "\f067";
-  font-size: 1.5rem;
-}
 
 .showItems {
   margin-top: 3rem;
@@ -189,20 +171,11 @@ input:focus {
   color: rgb(85, 41, 220);
 }
 
-.showItems .eachItem h3 {
-  padding-left: 1rem;
-  font-size: 1.6rem;
-  color: #fff;
-}
 
 .fa-trash-alt,
 .fa-edit {
-  /* margin-left: -2.5rem; */
   cursor: pointer;
-  pointer-events: auto;
-  z-index: 10;
   color: rgb(251, 251, 251);
-  -webkit-transition: color 0.15s linear;
   transition: color 0.15s linear;
   font-size: 2rem;
 }
@@ -301,4 +274,10 @@ input:focus {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+}
+
+/* card */
+.card{
+  margin-bottom: 10px;
+  margin-right: 10px;
 }

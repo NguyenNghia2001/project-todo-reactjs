@@ -1,66 +1,58 @@
-import React, { useState, useEffect} from 'react'
+import { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 
 function NewsPage() {
 
   const [items, setItems] = useState([]);
-  const [pageCount, setPageCount] = useState(0);
+  const [pageCount, setpageCount] = useState(0);
   let limit = 10;
-  console.log(items ,'011' )
 
   useEffect(() => {
-    const getComments = async () =>{
-      const respon = await fetch(`https://jsonplaceholder.typicode.com/comments?_page=1&_limit=${limit}`);
-      const data:any = respon.json();
-      const total:any = respon.headers.get("x-total-count");
-      setPageCount(Math.ceil(total/limit));
+    const getComments = async () => {
+      const res = await fetch(`https://jsonplaceholder.typicode.com/comments?_page=1&_limit=${limit}`
+      );
+      const data = await res.json();
+      const total:any = res.headers.get("x-total-count");
+      setpageCount(Math.ceil(total / limit));
       setItems(data);
     };
-    getComments();
 
-  },[limit]);
+    getComments();
+  }, [limit]);
 
   const fetchComments = async (currentPage:any) => {
-    const respon = await fetch(`https://jsonplaceholder.typicode.com/comments?_page=${currentPage}&_limit=${limit}`);
-    const data = await respon.json();
-    console.log(data , 'test 01')
+    const res = await fetch(`https://jsonplaceholder.typicode.com/comments?_page=${currentPage}&_limit=${limit}`
+    );
+    const data = await res.json();
     return data;
   };
 
-  const handlePageClick = async (data:any) =>{
-      // console.log(data.selected);
-      let currentPage = data.selected + 1;
-      const commentsFormServer = await fetchComments(currentPage);
+  const handlePageClick = async (data:any) => {
+    console.log(data.selected);
+    let currentPage = data.selected + 1;
+    const commentsFormServer = await fetchComments(currentPage);
     setItems(commentsFormServer);
-  }
+  };
 
-  return(
-    <div id="itemsContainer">
-        <div className="searchItem">
-            <form className="d-flex m-4 ">
-              <input className="form-control me-4" type="search" placeholder="Search" aria-label="Search" />
-              <button className="btn btn-danger" type="submit">Search</button>
-            </form>
-        </div>
-        <div className="listItem text-dark ">
-         {
-            items.map((value:any) =>(
-              <div className="newItem" key={value.id}>
-              <div className="card" style={{width: '18rem'}}>
-                <img className="card-img-top" src="..." alt="Card image cap" />
-                <div className="card-body">
-                  <h5 className="card-title">{value.name}</h5>
-                  <p className='text-info'>{value.email}</p>
-                  <p className="card-text">{value.body}</p>
-                  <a href="#" className="btn btn-primary">Detail Item {value.postId}</a>
-                </div>
-              </div>  
+  return (
+    <div className="container">
+      <div className="row m-2 text-info">
+        {items.map((item:any) => {
+          return (
+            <div className="card" style={{width: '18rem'}} key={item.id}>
+              <img src="https://vcdn-vnexpress.vnecdn.net/2021/07/07/Aventador-Ultimae-Coupe-1-3961-1625659942.jpg" className="card-img-top" alt="..." />
+              <div className="card-body">
+                <h5 className="card-title text-dark ">Title: {item.name}</h5>
+                <p className="card-text text-danger"> Email: {item.email}</p>
+                <p className="card-text"> Content: {item.body}</p>
+                <a href="#" className="btn btn-primary">Detail Item {item.postId}</a>
+              </div>
             </div>
-            ))
-          }   
-        </div>
-            
-        <ReactPaginate
+          );
+        })}
+      </div>
+
+      <ReactPaginate
         previousLabel={"previous"}
         nextLabel={"next"}
         breakLabel={"..."}
@@ -80,7 +72,7 @@ function NewsPage() {
         activeClassName={"active"}
       />
     </div>
-)
+  );
 }
 
-export default NewsPage
+export default NewsPage;
