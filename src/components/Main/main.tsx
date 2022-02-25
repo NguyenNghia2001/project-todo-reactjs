@@ -18,10 +18,10 @@ export const Main = () => {
             <div className="innerContainer news">
               <MainNews />
             </div>
-            <div className="innerContainer users">
-              {/* <WorkList /> */}
+            {/* <div className="innerContainer users">
+              <WorkList />
 
-            </div>
+            </div> */}
             
 
 

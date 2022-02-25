@@ -9,6 +9,7 @@ import {
 import App from "./App";
 // import boostrap 
 import 'bootstrap/dist/css/bootstrap.css';
+import "bootstrap/dist/js/bootstrap.min.js";
 import './css/todolist.css';
 import TodoList from './pages/TodoList';
 import NewsPage from './pages/NewsApp';

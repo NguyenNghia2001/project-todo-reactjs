@@ -10,8 +10,6 @@ export  const MainNews = () => {
         <>  
             <Link to="/itemnews" className="mb-4 fs-1 text-danger text-decoration-none text-app"> Read news information </Link> {" "}
             <div>
-
-                {/* <Outlet  key={2}/> */}
                 <NewsPage/>
             </div>
         </>

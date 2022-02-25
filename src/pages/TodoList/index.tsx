@@ -83,13 +83,9 @@ const ToDoList = () => {
       <>
           <div className="main-div">
               <div className="child-div">
-                  <figure>
-                      {/* <img src={todo:any} alt="todologo" /> */}
-                      <figcaption>Add Your List Here ✌</figcaption>
-                  </figure>
-
                   <div className="addItems">
                       <input type="text" placeholder="✍ Add Items..."
+                      className='form-control'
                          value={inputData} 
                          onChange={(e) => setInputData(e.target.value) }
                       />
@@ -120,7 +116,7 @@ const ToDoList = () => {
               
                   {/* clear all button  */}
                   <div className="showItems">
-                      <button className="btn effect04" data-sm-link-text="Remove All" onClick={removeAll}><span> CHECK LIST </span> </button>
+                      <button className="btn effect04 text-light" data-sm-link-text="Remove All" onClick={removeAll}> <span> CHECK LIST </span> </button>
                   </div>
               </div>
         </div>  
