@@ -12,14 +12,14 @@ export const Main = () => {
         <div className="album py-5 bg-light">
          <div id="container">
               {/* gọi đến component */}
-            <div className="innerContainer ">
+            <div className="innerContainer Todo">
               <WorkList />
             </div>
-            <div className="innerContainer ">
+            <div className="innerContainer news">
               <MainNews />
             </div>
-            <div className="innerContainer ">
-              <WorkList />
+            <div className="innerContainer users">
+              {/* <WorkList /> */}
 
             </div>
             

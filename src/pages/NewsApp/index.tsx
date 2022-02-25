@@ -5,7 +5,7 @@ function NewsPage() {
 
   const [items, setItems] = useState([]);
   const [pageCount, setpageCount] = useState(0);
-  let limit = 10;
+  let limit = 5;
 
   useEffect(() => {
     const getComments = async () => {
@@ -37,6 +37,10 @@ function NewsPage() {
   return (
     <div className="container">
       <div className="row m-2 text-info">
+      <form className="d-flex m-3 p-3">
+        <input className="form-control me-2" type="search" placeholder="Search Item" aria-label="Search" />
+        <button className="btn btn-outline-success" type="submit">Search</button>
+      </form>
         {items.map((item:any) => {
           return (
             <div className="card" style={{width: '18rem'}} key={item.id}>

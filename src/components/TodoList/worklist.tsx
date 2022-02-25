@@ -1,5 +1,5 @@
 import React from "react";
-
+import TodoList from '../../pages/TodoList'
 import {
     Link,
     Outlet,
@@ -9,7 +9,8 @@ export  const WorkList = () => {
     return(
         <>  
             <Link to="/todolist" className="mb-4 fs-1 text-danger   text-decoration-none text-app">Todo  List App </Link> {" "}
-            <Outlet />
+            {/* <Outlet  key={1}/> */}
+            <TodoList/>
         </>
        
     )
