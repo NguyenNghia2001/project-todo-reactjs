@@ -1,5 +1,5 @@
 ## Treanning reactjs typescript
-# Search News
+# I. Search News
 1. Thiết kế UI cho Search News -> hoàn thành
 2. Load 10 Items 
     - Tạo API -> hoàn thành 
@@ -13,11 +13,43 @@
     - Tiến hành Call API và Render Item Search -> hoàn thành 
 5. Remove News -> hoàn thành
 6. Detail News 
-    - Tìm ID của item New -> TODO
-    - Thiết kế UI cho Detail -> TODO
-    - Render Data -> TODO
+    - Tìm ID của item New -> hoàn thành
+    - Thiết kế UI cho Detail -> hoàn thành
+    - Render Data -> hoàn thành
 7. Form Submit Data Item 
     - Thiết kế UI form -> hoàn thành 
     - push data từ form -> hoàn thành
-    - put data từ form -> 85%
+    - put data từ form -> hoàn thành
+
+# II . Users Managements
+
+1. Tìm hiều những thư viện cần dùng trong project
+    - Marterial-UI basic-> hoàn thành
+    - Formik basic-> hoàn thành
+    - React-hook-form -> 20%
+    - Redux basic-> hoàn thành
+
+2. Thiết kế UI cho quản lý Users bằng Marterial-UI 
+    - Thiết kế UI form nhập Data -> 30%
+    - Thiết kế UI render UI cho user 
+
+3. Tạo API -> hoàn thành 
+
+4. Validate tất cả các form trong project 
+
+5. Thực hiệc Call API 
+    - POST data từ form lên API
+    - GET data render UI 
+    - PUT data từ API về và thực hiện cập nhật
+    - DELETE user trong API và xóa ra khỏi giao diện
+
+6. Render Users lên UI 
+
+
+### TODO Đêm nay 
+1. thiết kế UI bằng Marterial UI 
+    - thiết kế form nhập 
+    - example 1 số ví dụ như Formik , redux 
+    - tạo Api 
+
 
