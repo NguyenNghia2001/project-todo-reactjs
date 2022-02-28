@@ -13,11 +13,11 @@
     - Tiến hành Call API và Render Item Search -> hoàn thành 
 5. Remove News -> hoàn thành
 6. Detail News 
-    - Tìm ID của item New -> ....
-    - Thiết kế UI cho Detail -> ....
-    - Render Data -> ....
+    - Tìm ID của item New -> TODO
+    - Thiết kế UI cho Detail -> TODO
+    - Render Data -> TODO
 7. Form Submit Data Item 
     - Thiết kế UI form -> hoàn thành 
     - push data từ form -> hoàn thành
-    - put data từ form -> .....
+    - put data từ form -> 85%
 

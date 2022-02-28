@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
-import { PostRequestHooks } from "../../components/News/postdata";
+import { DetailNewItem } from "../../components/News/detailNew";
+import { PostRequestHooks } from "../../components/News/postDataAPI";
+import { PutRequestHooks } from "../../components/News/putDataApi";
+
 
 export type IUser = {
   id: string,
@@ -14,6 +17,7 @@ function NewsPage() {
   const [items, setItems] = useState<IUser[]>([]);
   const [pageCount, setpageCount] = useState<number>(0);
   const [userHandle, setUserHandle] = useState<IUser | null>();
+  const [detail, setDetail] = useState<IUser | null>();
 
   let limit = 12;
   //  xử lý logic render data to ui 
@@ -70,7 +74,7 @@ function NewsPage() {
     }
     await deletePost();
   };
-  
+
   return (
     <div className="container">
       <div className="row m-2 text-info">
@@ -84,12 +88,18 @@ function NewsPage() {
           />
           <button className="btn btn-outline-success" type="submit">Search</button>
         </form>
+          {!detail ? null : <PostRequestHooks/> }
 
-        {/* TODO: post data  */}
+          {/* <PostRequestHooks/> */}
+
         {/* Modal form */}
-        {userHandle && <PostRequestHooks data={userHandle} setData={setUserHandle} />} 
-
+        {userHandle && <PutRequestHooks data={userHandle} setData={setUserHandle} />} 
         {/* End Modal */}
+
+        {/* Detail Item */}
+        {detail && <DetailNewItem data={detail} setDataDetail={setDetail} />} 
+        {/* End Detail */}
+
         {items.map((item: any) => {
           return (
             <div className="card" style={{ width: '18rem' }} key={item.id}>
@@ -99,11 +109,16 @@ function NewsPage() {
                 <p className="card-text text-danger"> Email: {item.email}</p>
                 <p className="card-text"> Content: {item.body}</p>
                 <a href='#'
-                  className="btn btn-outline-warning"
+                  className="btn btn-outline-warning m-2"
                   onClick={() => setUserHandle(item)}
                   data-bs-toggle="modal" data-bs-target="#exampleModal"
+                >Update</a>
+                <a href='#' className="btn btn-outline-danger m-2" onClick={handleRemove(`${item.id}`)}>Remove</a>
+                <a href='#'
+                  className="btn btn-outline-primary m-2"
+                  onClick={() => setDetail(item)}
+                  data-bs-toggle="modal" data-bs-target="#exampleModal"
                 >Detail</a>
-                <a href='#' className="btn btn-outline-danger" onClick={handleRemove(`${item.id}`)}>Remove</a>
               </div>
             </div>
           );

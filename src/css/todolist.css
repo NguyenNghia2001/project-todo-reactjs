@@ -277,3 +277,50 @@ input:focus {
   margin-bottom: 10px;
   margin-right: 10px;
 }
+
+/* Render UI PUT data Api */
+#modalContainer {
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  padding: 5%;
+  z-index: 999;
+  margin-left: 20%;
+  transform: scaleY(1.5);
+}
+
+.modalInnerContainer {
+  background: rgba(136, 135, 135, 0.9);
+  height:60%;
+  width: 60%;
+  border-radius: 10px;
+}
+
+
+#detailContainer {
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  padding: 5%;
+  z-index: 999;
+  margin-left: 20%;
+  transform: scaleY(1.5);
+}
+
+.detailInnerContainer {
+  background: rgb(238, 237, 235);
+  height:60%;
+  width: 60%;
+  border-radius: 10px;
+}
+.detailForm{
+  display: flex;
+  flex-direction: row;
+  padding: 1%;
+}
+.detailCotent {
+  margin: 1%;
+}
+
