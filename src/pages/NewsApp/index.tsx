@@ -19,7 +19,7 @@ function NewsPage() {
   const [userHandle, setUserHandle] = useState<IUser | null>();
   const [detail, setDetail] = useState<IUser | null>();
 
-  let limit = 12;
+  let limit = 8;
   //  xử lý logic render data to ui 
   useEffect(() => {
     const getComments = async () => {
