@@ -4,6 +4,8 @@ import React from "react";
 import {Jumbotron} from '../Header/jumbotron';
 import { MainNews } from "../News/mainNews";
 import {WorkList} from '../TodoList/worklist';
+import { FormDataUsers } from "../User/formDataUser";
+import RenderDataUserTable from "../User/renderDataUser";
 
 export const Main = () => {
     return (
@@ -18,13 +20,18 @@ export const Main = () => {
             <div className="innerContainer news">
               <MainNews />
             </div>
-            {/* <div className="innerContainer users">
-              <WorkList />
-
-            </div> */}
-            
-
-
+          </div>
+          <div className="container-03 m-5">
+              <div className="containerForm">
+                <div className="formData m-4">
+                  <FormDataUsers />
+                </div>
+              </div>
+              <div className="containerUsers">
+                <div className="tableUsers">
+                    <RenderDataUserTable/>
+                </div>
+              </div>
           </div>
          </div>
        </main>

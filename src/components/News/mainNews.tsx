@@ -2,7 +2,6 @@ import React from "react";
 import NewsPage from '../../pages/NewsApp'
 import {
     Link,
-    Outlet,
   } from 'react-router-dom';
 
 export  const MainNews = () => {

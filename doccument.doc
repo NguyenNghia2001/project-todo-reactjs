@@ -26,16 +26,16 @@
 1. Tìm hiều những thư viện cần dùng trong project
     - Marterial-UI basic-> hoàn thành
     - Formik basic-> hoàn thành
-    - React-hook-form -> 20%
+    - React-hook-form -> hoàn thành
     - Redux basic-> hoàn thành
 
 2. Thiết kế UI cho quản lý Users bằng Marterial-UI 
-    - Thiết kế UI form nhập Data -> 30%
-    - Thiết kế UI render UI cho user 
+    - Thiết kế UI form nhập Data -> hoàn thành
+    - Thiết kế UI render UI cho user -> hoàn thành
 
 3. Tạo API -> hoàn thành 
 
-4. Validate tất cả các form trong project 
+4. Validate form trong project -> hoàn thành
 
 5. Thực hiệc Call API 
     - POST data từ form lên API
@@ -43,13 +43,13 @@
     - PUT data từ API về và thực hiện cập nhật
     - DELETE user trong API và xóa ra khỏi giao diện
 
-6. Render Users lên UI 
+6. Render Users lên UI -> GET
 
 
 ### TODO Đêm nay 
 1. thiết kế UI bằng Marterial UI 
     - thiết kế form nhập 
     - example 1 số ví dụ như Formik , redux 
-    - tạo Api 
+    - tạo Api : https://621d98a1806a09850a5d7028.mockapi.io/Users
 
 

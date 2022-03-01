@@ -324,3 +324,21 @@ input:focus {
   margin: 1%;
 }
 
+.container-03{
+  background-color: #f2eefc;
+  display: flex;
+  flex-direction: row;
+}
+
+.containerForm{
+  /* background-color: antiquewhite; */
+  flex: 1;
+}
+.containerUsers{
+  flex: 1;
+  background-color: rgb(201, 245, 245);
+}
+.formData{
+  margin-left: 20%;
+  
+}
