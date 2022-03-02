@@ -38,18 +38,15 @@
 4. Validate form trong project -> hoàn thành
 
 5. Thực hiệc Call API 
-    - POST data từ form lên API
-    - GET data render UI 
+    - POST data từ form lên API -> hoàn thành
+    - GET data render UI -> hoàn thành
+    - Re-Render sau khi POST data
     - PUT data từ API về và thực hiện cập nhật
     - DELETE user trong API và xóa ra khỏi giao diện
 
-6. Render Users lên UI -> GET
+6. Render Users API lên UI -> GET -> hoàn thành
 
 
-### TODO Đêm nay 
-1. thiết kế UI bằng Marterial UI 
-    - thiết kế form nhập 
-    - example 1 số ví dụ như Formik , redux 
-    - tạo Api : https://621d98a1806a09850a5d7028.mockapi.io/Users
+
 
 

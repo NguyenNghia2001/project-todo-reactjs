@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import 
 { 
     Button, 
@@ -12,22 +12,31 @@ import
 from '@mui/material';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { type } from 'os';
 
 
-enum Option {
-    nam,
-    nu
+export type UserData = {
+    fullname: string,
+    email : string,
+    address: string,
+    gender: string,
+    phone : string,
+    persionalinfo: string,
 }
 
+function reload() {
+    window.location.reload();
+}
 export const FormDataUsers = () => {
+
     const formik = useFormik({
         initialValues: {
             fullname: '',
             email: '',
             address: '',
-            gender : true,
+            gender : '',
             phone : '',
-            persoinalinfo : '',
+            persionalinfo : '',
         },
         validationSchema: Yup.object({
             fullname : Yup.string()
@@ -39,19 +48,39 @@ export const FormDataUsers = () => {
                 .min(10 , 'Address cannot be < 10 characters')
                 .max(100 , 'Address cannot be > 100 characters')
                 .required('Address required to enter'),
-            gender: Yup.boolean()
+            gender: Yup.string()
                 .required('Gender required to enter'),
-            phone: Yup.number()
-                .min(0, "Phone cannot be < 1 characters")
-                .max(13 , 'Phone cannot be > 13 characters')
+            phone: Yup.string()
+                .min(8, "Phone cannot be < 10 characters")
+                .max(11 , 'Phone cannot be > 11 characters')
                 .required('Phone required to enter'),
-            persoinalinfo : Yup.string()
+            persionalinfo : Yup.string()
                 .min(10 , "Persional Information cannot be < 3 characters")
                 .max(150 , "Persional Information cannot be < 3 characters")
                 .required('Persional Information required to enter'),
         }),
-        onSubmit: (values:any) => {
-         console.log(values , 'nghíadsa')
+        onSubmit: (arrData:UserData) => {
+            try {
+                const requestOptions = {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        fullname : arrData.fullname,
+                        email: arrData.email,
+                        address: arrData.address,
+                        gender: arrData.gender,
+                        phone: arrData.phone,
+                        persionalinfo: arrData.persionalinfo
+                      }) 
+                };
+                fetch('https://621d98a1806a09850a5d7028.mockapi.io/Users', requestOptions)
+                .then(response => response.json())
+                .then(data => data.arrData);
+                
+            } catch (error) {
+              console.log(error);
+            }
+            reload()
         },
       });
 
@@ -115,10 +144,16 @@ export const FormDataUsers = () => {
                     </FormControl>
                     <FormControl component="fieldset"  sx={{ width: 600 , marginBottom: 1}} >
                         <FormLabel component="legend">Gender</FormLabel>
-                        <RadioGroup aria-label="gender" name="gender" >
-                            <FormControlLabel value="female" control={<Radio/>} label="Female"  />
-                            <FormControlLabel value="male" control={<Radio  />} label="Male"  />
+                        <RadioGroup aria-label="gender" name="gender" value={formik.values.gender}  onChange={formik.handleChange}>
+                            <FormControlLabel value='female' control={<Radio/>} label="Female"  />
+                            <FormControlLabel value='male' control={<Radio  />} label="Male"  />
                         </RadioGroup>
+                        {
+                            
+                            formik.touched.gender && formik.errors.gender ? (
+                                <div className='text-danger'>{formik.errors.gender}</div>
+                            ):null
+                        }
                     </FormControl>
                     <FormControl>
                         <TextField
@@ -139,22 +174,21 @@ export const FormDataUsers = () => {
                         }
                     </FormControl>
                     <FormControl>
-                         <FormLabel component="legend" sx = {{fontSize: 12, marginBottom:2}}>Persional Informasion</FormLabel>
                          <TextField
-                            id="persoinalinfo"
-                            name='persoinalinfo'
+                            id="persionalinfo"
+                            name='persionalinfo'
                             label="Persional Informasion"
                             type="text"  
                             multiline 
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
-                            value={formik.values.persoinalinfo}
+                            value={formik.values.persionalinfo}
                             variant="standard"
                             sx={{ width: 600 , marginBottom: 1}} 
                         />
                          {
-                            formik.touched.persoinalinfo && formik.errors.persoinalinfo ? (
-                                <div className='text-danger'>{formik.errors.persoinalinfo}</div>
+                            formik.touched.persionalinfo && formik.errors.persionalinfo ? (
+                                <div className='text-danger'>{formik.errors.persionalinfo}</div>
                             ):null
                         }
                     </FormControl>
@@ -165,6 +199,16 @@ export const FormDataUsers = () => {
                             type="submit"
                         >   
                             Submit
+                        </Button>
+                    </FormControl>
+                    <FormControl>
+                        <Button 
+                            variant="contained"  
+                            sx={{ width: 240 , marginBottom: 1, marginLeft: 5, backgroundColor: "#21b6ae"}}
+                            type="submit"
+                            onClick={formik.handleReset}
+                        >   
+                            Clear
                         </Button>
                     </FormControl>
                    
