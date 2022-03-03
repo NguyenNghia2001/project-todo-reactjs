@@ -32,9 +32,7 @@ const ToDoList = () => {
               })
           )
                setToggleSubmit(true);
-
                setInputData('');
-
                setIsEditItem(null);
       } else {
           const allInputData = { id: new Date().getTime().toString(), name:inputData }
@@ -59,11 +57,8 @@ const ToDoList = () => {
           return elem.id === id
       });
       console.log(newEditItem);
-
       setToggleSubmit(false);
-
       setInputData(newEditItem.name);
-
       setIsEditItem(id);
 
   }

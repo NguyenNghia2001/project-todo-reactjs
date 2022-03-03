@@ -23,12 +23,15 @@ export type UserData = {
     phone : string,
     persionalinfo: string,
 }
+export interface  IsShow {
+    isshow: false
+}
+
 
 function reload() {
     window.location.reload();
 }
-export const FormDataUsers = () => {
-
+export const FormDataUsers = (props:any) => {
     const formik = useFormik({
         initialValues: {
             fullname: '',
@@ -80,140 +83,139 @@ export const FormDataUsers = () => {
             } catch (error) {
               console.log(error);
             }
-            reload()
         },
       });
-
+      console.log(props.data)
     return (
-            <React.Fragment>
-            <FormLabel component="legend" sx = {{fontSize: 20 ,marginLeft: 20}}>Enter your information in the form below</FormLabel>
-                 <form className='m-5' onSubmit={formik.handleSubmit}>
-                    <FormControl>
-                        <TextField
-                            id="email"
-                            name = "email"
-                            label="Email Address"
-                            type="email"
-                            variant="standard"
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                            value={formik.values.email}
-                            sx={{ width: 600 , marginBottom: 1 }} 
-                        />
+        <React.Fragment>
+        <FormLabel component="legend" sx = {{fontSize: 20 ,marginLeft: 20}}>Enter your information in the form below</FormLabel>
+                <form className='m-5' onSubmit={formik.handleSubmit}>
+                <FormControl>
+                    <TextField
+                        id="email"
+                        name = "email"
+                        label="Email Address"
+                        type="email"
+                        variant="standard"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.email}
+                        sx={{ width: 600 , marginBottom: 1 }} 
+                    />
+                    {
+                        formik.touched.email && formik.errors.email ? (
+                            <div className='text-danger'>{formik.errors.email}</div>
+                        ):null
+                    }
+                </FormControl>
+                <FormControl>
+                    <TextField
+                        id="fullname"
+                        name = "fullname"
+                        label="Fullname"
+                        type="text"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.fullname}
+                        variant="standard"
+                        sx={{ width: 600 ,  marginBottom: 1 }} 
+                    />
                         {
-                            formik.touched.email && formik.errors.email ? (
-                                <div className='text-danger'>{formik.errors.email}</div>
-                            ):null
-                        }
-                    </FormControl>
-                    <FormControl>
+                        formik.touched.fullname && formik.errors.fullname ? (
+                            <div className='text-danger'>{formik.errors.fullname}</div>
+                        ):null
+                    }
+                </FormControl>
+                <FormControl>
+                    <TextField
+                        id="address"
+                        name="address"
+                        label="Address"
+                        type="text"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.address}
+                        variant="standard"
+                        sx={{ width: 600 , marginBottom: 1}} 
+                    />
+                    {
+                        formik.touched.address && formik.errors.address ? (
+                            <div className='text-danger'>{formik.errors.address}</div>
+                        ):null
+                    }
+                </FormControl>
+                <FormControl component="fieldset"  sx={{ width: 600 , marginBottom: 1}} >
+                    <FormLabel component="legend">Gender</FormLabel>
+                    <RadioGroup aria-label="gender" name="gender" value={formik.values.gender}  onChange={formik.handleChange}>
+                        <FormControlLabel value='female' control={<Radio/>} label="Female"  />
+                        <FormControlLabel value='male' control={<Radio  />} label="Male"  />
+                    </RadioGroup>
+                    {
+                        
+                        formik.touched.gender && formik.errors.gender ? (
+                            <div className='text-danger'>{formik.errors.gender}</div>
+                        ):null
+                    }
+                </FormControl>
+                <FormControl>
+                    <TextField
+                        id="phone"
+                        name='phone'
+                        label="Phone Number"
+                        type="number"   
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.phone}
+                        variant="standard"
+                        sx={{ width: 600 , marginBottom: 1}} 
+                    />
+                    {
+                        formik.touched.phone && formik.errors.phone ? (
+                            <div className='text-danger'>{formik.errors.phone}</div>
+                        ):null
+                    }
+                </FormControl>
+                <FormControl>
                         <TextField
-                            id="fullname"
-                            name = "fullname"
-                            label="Fullname"
-                            type="text"
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                            value={formik.values.fullname}
-                            variant="standard"
-                            sx={{ width: 600 ,  marginBottom: 1 }} 
-                        />
-                         {
-                            formik.touched.fullname && formik.errors.fullname ? (
-                                <div className='text-danger'>{formik.errors.fullname}</div>
-                            ):null
-                        }
-                    </FormControl>
-                    <FormControl>
-                        <TextField
-                            id="address"
-                            name="address"
-                            label="Address"
-                            type="text"
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                            value={formik.values.address}
-                            variant="standard"
-                            sx={{ width: 600 , marginBottom: 1}} 
-                        />
+                        id="persionalinfo"
+                        name='persionalinfo'
+                        label="Persional Informasion"
+                        type="text"  
+                        multiline 
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.persionalinfo}
+                        variant="standard"
+                        sx={{ width: 600 , marginBottom: 1}} 
+                    />
                         {
-                            formik.touched.address && formik.errors.address ? (
-                                <div className='text-danger'>{formik.errors.address}</div>
-                            ):null
-                        }
-                    </FormControl>
-                    <FormControl component="fieldset"  sx={{ width: 600 , marginBottom: 1}} >
-                        <FormLabel component="legend">Gender</FormLabel>
-                        <RadioGroup aria-label="gender" name="gender" value={formik.values.gender}  onChange={formik.handleChange}>
-                            <FormControlLabel value='female' control={<Radio/>} label="Female"  />
-                            <FormControlLabel value='male' control={<Radio  />} label="Male"  />
-                        </RadioGroup>
-                        {
-                            
-                            formik.touched.gender && formik.errors.gender ? (
-                                <div className='text-danger'>{formik.errors.gender}</div>
-                            ):null
-                        }
-                    </FormControl>
-                    <FormControl>
-                        <TextField
-                            id="phone"
-                            name='phone'
-                            label="Phone Number"
-                            type="number"   
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                            value={formik.values.phone}
-                            variant="standard"
-                            sx={{ width: 600 , marginBottom: 1}} 
-                        />
-                        {
-                            formik.touched.phone && formik.errors.phone ? (
-                                <div className='text-danger'>{formik.errors.phone}</div>
-                            ):null
-                        }
-                    </FormControl>
-                    <FormControl>
-                         <TextField
-                            id="persionalinfo"
-                            name='persionalinfo'
-                            label="Persional Informasion"
-                            type="text"  
-                            multiline 
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                            value={formik.values.persionalinfo}
-                            variant="standard"
-                            sx={{ width: 600 , marginBottom: 1}} 
-                        />
-                         {
-                            formik.touched.persionalinfo && formik.errors.persionalinfo ? (
-                                <div className='text-danger'>{formik.errors.persionalinfo}</div>
-                            ):null
-                        }
-                    </FormControl>
-                    <FormControl>
-                        <Button 
-                            variant="contained"  
-                            sx={{ width: 240 , marginBottom: 1}}
-                            type="submit"
-                        >   
-                            Submit
-                        </Button>
-                    </FormControl>
-                    <FormControl>
-                        <Button 
-                            variant="contained"  
-                            sx={{ width: 240 , marginBottom: 1, marginLeft: 5, backgroundColor: "#21b6ae"}}
-                            type="submit"
-                            onClick={formik.handleReset}
-                        >   
-                            Clear
-                        </Button>
-                    </FormControl>
-                   
-                </form>
-            </React.Fragment>
+                        formik.touched.persionalinfo && formik.errors.persionalinfo ? (
+                            <div className='text-danger'>{formik.errors.persionalinfo}</div>
+                        ):null
+                    }
+                </FormControl>
+                <FormControl>
+                    <Button 
+                        variant="contained"  
+                        sx={{ width: 240 , marginBottom: 1}}
+                        type="submit"
+                    >   
+                        Submit
+                    </Button>
+                </FormControl>
+                <FormControl>
+                    <Button 
+                        variant="contained"  
+                        sx={{ width: 240 , marginBottom: 1, marginLeft: 5, backgroundColor: "#21b6ae"}}
+                        type="submit"
+                        onClick={formik.handleReset}
+                    >   
+                        Clear
+                    </Button>
+                </FormControl>
+                
+            </form>
+        </React.Fragment>
                  
 
     )
