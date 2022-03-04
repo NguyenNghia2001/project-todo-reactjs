@@ -13,16 +13,8 @@ from '@mui/material';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { type } from 'os';
+import { UserData } from './renderDataUser';
 
-
-export type UserData = {
-    fullname: string,
-    email : string,
-    address: string,
-    gender: string,
-    phone : string,
-    persionalinfo: string,
-}
 export interface  IsShow {
     isshow: false
 }
@@ -31,16 +23,15 @@ export interface  IsShow {
 function reload() {
     window.location.reload();
 }
-export const FormDataUsers = (props:any) => {
+interface IProps{
+    data:UserData
+}
+
+export const FormDataUsers = (props:IProps) => {
+
     const formik = useFormik({
-        initialValues: {
-            fullname: '',
-            email: '',
-            address: '',
-            gender : '',
-            phone : '',
-            persionalinfo : '',
-        },
+        initialValues: props.data,
+        enableReinitialize:true,
         validationSchema: Yup.object({
             fullname : Yup.string()
                 .min(3, ' Fullname cannot be < 3 characters')

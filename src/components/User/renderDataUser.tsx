@@ -15,6 +15,7 @@ const columns: GridColDef[] = [
 ];
 
 export type UserData = {
+  id:string,
   fullname: string,
   email : string,
   address: string,
@@ -23,11 +24,15 @@ export type UserData = {
   persionalinfo: string,
 }
 
+// để truyền dữ liệu qua thì dùng prop và có 1 state trung gian để truyền dữ liệu qua
+interface  IProps{
+setDataUser:(value:UserData)=>void;
+}
 
-export default function RenderDataUserTable(props:any) {
+export default function RenderDataUserTable(props:IProps) {
 
-  const [dataUsers , setDataUsers] = useState([]);
-  const [itemdata , setItemdata] = useState('');
+  const [dataUsers , setDataUsers] = useState<UserData[]>([]);
+
   useEffect (() => {
     const url = 'https://621d98a1806a09850a5d7028.mockapi.io/Users';
     fetch(url)
@@ -36,7 +41,7 @@ export default function RenderDataUserTable(props:any) {
       .catch(error => console.log(error))
   },[])
 
-  const handleRemove = (itemId: any) => async () => {
+  const handleRemove = (itemId: number) => async () => {
     console.log(itemId)
     async function deletePost() {
       try {
@@ -49,9 +54,10 @@ export default function RenderDataUserTable(props:any) {
     }
     await deletePost();
   };
-  console.log(props.dataUsers)
+
   const handleOnCellClick = (params:any) => {
-    console.log(params.row.id)
+    console.log(params.row);
+    props.setDataUser(params.row as UserData);
   };
 
   return (
@@ -73,7 +79,6 @@ export default function RenderDataUserTable(props:any) {
             
           />
           
-
         
     </div>
   );
